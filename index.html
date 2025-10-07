@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ♾️❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2em;
+            font-style: italic;
+        }
+
+        /* Auto Sliding Section */
+        .slider-section {
+            margin: 60px 0;
+            animation: fadeIn 1.5s ease-in;
+            position: relative;
+            padding: 60px 20px;
+        }
+
+        .slider-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=1200&h=800&fit=crop&blur=50');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            border-radius: 30px;
+            z-index: -1;
+        }
+
+        .slider-title {
+            text-align: center;
+            color: white;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 380px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .slider {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-dots {
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dot {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: #ff6b9d;
+            transform: scale(1.3);
+        }
+
+        /* Memories Section */
+        .memories-section {
+            text-align: center;
+            margin: 80px 0;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .memories-button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 25px 60px;
+            font-size: 1.5em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        .memories-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .memories-content {
+            display: none;
+            margin-top: 40px;
+            animation: popUp 0.6s ease-out;
+        }
+
+        .video-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            transform: scale(1);
+        }
+
+        .memories-content.show {
+            animation: popUp 0.6s ease-out;
+        }
+
+        .video-container h3 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        video {
+            width: 100%;
+            max-height: 500px;
+            border-radius: 15px;
+        }
+
+        /* Letter Section */
+        .letter-section {
+            text-align: center;
+            margin: 80px 0;
+            animation: fadeIn 2.5s ease-in;
+        }
+
+        .heart-container {
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        .heart {
+            width: 90px;
+            height: 90px;
+            background: #ff6b9d;
+            position: relative;
+            transform: rotate(-45deg);
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+        }
+
+        .heart:hover {
+            transform: rotate(-45deg) scale(1.15);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.6);
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            width: 90px;
+            height: 90px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart::before {
+            top: -45px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 45px;
+            top: 0;
+        }
+
+        .heart-text {
+            color: white;
+            margin-top: 40px;
+            font-size: 1.3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: slideIn 0.5s ease-out;
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.5);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #ff6b9d;
+        }
+
+        .letter-content {
+            color: #333;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .letter-content h2 {
+            color: #ff6b9d;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .letter-content p {
+            margin-bottom: 15px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes popUp {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+
+            60% {
+                transform: scale(1.05) translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .slider-container {
+                height: 320px;
+            }
+
+            .memories-button {
+                padding: 20px 40px;
+                font-size: 1.2em;
+            }
+
+            .modal-content {
+                padding: 30px;
+            }
+        }
+
+        .poem-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffe8f0 100%);
+            border-radius: 15px;
+            border-left: 4px solid #ff6b9d;
+        }
+
+        .center {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #d63384;
+            margin-bottom: 15px;
+        }
+
+        .indent {
+            text-align: center;
+            font-style: italic;
+            color: #c2185b;
+            line-height: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>💕 For My Jaanu 💕</h1>
+            <!-- <p class="subtitle"> Our beautiful moments together</p> -->
+        </header>
+
+        <!-- Auto Sliding Photos Section -->
+        <section class="slider-section">
+            <h2 class="slider-title">✨ Our Twinkles ✨</h2>
+            <div class="slider-container">
+                <div class="slider" id="slider">
+                    <div class="slide">
+                        <img src="Images/BdayPeacecafe.jpg" alt="Us 1">
+                    </div>
+                    <div class="slide">
+                        <img src="Images/Gibli farewell.png" alt="Us 2">
+                    </div>
+                    <div class="slide">
+                        <img src="Images/FarewellJss.jpg" alt="Us 3">
+                    </div>
+                    <div class="slide">
+                        <img src="ClgGhibli.png" alt="Us 4" class="slide-image">
+                    </div>
+                    <div class="slide">
+                        <img src="Images/NandiHills1.jpg" alt="Us 5">
+                    </div>
+                </div>
+            </div>
+            <div class="slider-dots" id="dots"></div>
+        </section>
+
+        <!-- Memories Video Section -->
+        <section class="memories-section">
+            <button class="memories-button" onclick="showMemories()">
+                Press Play for My Feelings 💕
+            </button>
+            <div class="memories-content" id="memoriesContent">
+                <div class="video-container">
+                    <h3>Our Story in Every Frame💕</h3>
+                    <video controls id="mainVideo">
+                        <source src="Vdo/InShot_20251007_110734776.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Letter Section -->
+        <section class="letter-section">
+            <div class="heart-container">
+                <div class="heart" onclick="openLetter()"></div>
+            </div>
+            <p class="heart-text"> Every Word Here Is for You 💌</p>
+        </section>
+    </div>
+
+    <!-- Letter Modal -->
+    <div id="letterModal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close" onclick="closeLetter()">&times;</span>
+            <div class="letter-content">
+                <h2>To My Beautiful Jaanu 💕</h2>
+                <p>Hiii Gorgeous Raksha Putta ❤️</p>
+                <p>
+                    Missing u so much putta .. Dinvella ninna nenpugal olage na irtini le appi, Mrng agli night agli
+                    kans olag agli Yella kade nin avarisikondi putta. "Like a fish jumping
+                    out of the water struggling to breathe 🥹" hang ageti appi nin joti matadade ,every thought nin
+                    related irteti
+                    le appi. Nin nodak bhal kaytini putta,I am craving for u katti ❤️. Nanag nin ilda Life na imagine
+                    madkollud illa le appi, Bhal bhaya agteti ni ilda life
+                    imagine mdkollud nang,nang ada beda ansteti nin ilda nan life appi , i can't live without u le appi
+                    🥹❤️...
+                    "Without you,Jaanu this Panda feels forever incomplete , a half‑formed soul searching for its
+                    missing piece"
+                </p>
+                <p> Nan inda na nang e situation bandeti anta nu gott putta ,nin absence bhal arta mdsyv le appi 🥹.nan
+                    mel ondsarti nambike idu kare sari madkond ulskoltini putta nin nambike na plzz jaanu 🥹🤍. .
+                </p>
+
+
+                <div class="poem-section">
+                    <p class="center">ನೀ ಒಪ್ಪುವುದಾದರೆ..?</p>
+                    <p class="indent">ನಿನ್ನ ಸಂತೋಷಕ್ಕೆ ಕಾರಣವಾಗಿ..</p>
+                    <p class="indent">ನಿನಗೆ ಸಮಸ್ಯೆ ಆಗದೆ..</p>
+                    <p class="indent">ನೀ ನಡೆವ ದಾರಿಗೆ ಜೊತೆಯಾಗಿ..</p>
+                    <p class="indent">ನೀ ಇಡುವ ಹೆಜ್ಜೆಗೆ ನೆರಳಾಗಿ..</p>
+                    <p class="indent">ನಿನಗೆ ಸಂಗಾತಿಯಾಗಿರುವೆ..</p>
+                </div>
+
+                <p>I love you more than words can express, You are my everything.
+                </p>
+                <p style="margin-top: 30px;">Forever yours,</p>
+                <p><em>Your Panda 🐼❤️</em></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const slider = document.getElementById('slider');
+        const dotsContainer = document.getElementById('dots');
+
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'dot';
+            if (i === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+
+        // Auto slide every 3 seconds
+        setInterval(nextSlide, 3000);
+
+        // Show Memories
+        function showMemories() {
+            const content = document.getElementById('memoriesContent');
+            const video = document.getElementById('mainVideo');
+
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                content.classList.add('show');
+                setTimeout(() => {
+                    content.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            } else {
+                content.style.display = 'none';
+                content.classList.remove('show');
+                if (!video.paused) {
+                    video.pause();
+                }
+            }
+        }
+
+        // Video auto-pause on scroll
+        let isVideoPlaying = false;
+        const video = document.getElementById('mainVideo');
+
+        if (video) {
+            video.addEventListener('play', function () {
+                isVideoPlaying = true;
+            });
+
+            video.addEventListener('pause', function () {
+                isVideoPlaying = false;
+            });
+        }
+
+        // Detect scroll and pause video if playing
+        let scrollTimeout;
+        window.addEventListener('scroll', function () {
+            const video = document.getElementById('mainVideo');
+            const content = document.getElementById('memoriesContent');
+
+            if (content && content.style.display === 'block' && video && !video.paused) {
+                video.pause();
+            }
+
+            clearTimeout(scrollTimeout);
+        });
+
+        // Letter Modal
+        function openLetter() {
+            document.getElementById('letterModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLetter() {
+            document.getElementById('letterModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeModal(event) {
+            if (event.target.id === 'letterModal') {
+                closeLetter();
+            }
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeLetter();
+            }
+        });
+    </script>
+</body>
+
+</html>
